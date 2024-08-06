@@ -44,4 +44,9 @@ class Book extends Model
             $query->whereBetween('created_at', [$from, $to]);
         }
     }
+
+    public function scopePopularLastMonth(Builder $query): Builder | QueryBuilder
+    {
+            return $query->popular(now()->subMonth(), now())->highestRated(now()->subMonth(), now())->minReviews(2);
+    }
 }
